@@ -15,8 +15,8 @@ while true; do
             Transformer votre distribution en serveur.
             Assurez-vous d'être en root avant d'exécuter le script
 
-            1. Installer les enssentiels (docker etc)
-            2. Installer les essentiels de sécurité
+            1. Mettre en place les éléments essentiels (Docker, etc.)
+            2. Mettre en place les éléments essentiels de sécurité
             3. Faire une backup du pc (a faire avant tout)
             99. Quit
 EOF
@@ -31,17 +31,19 @@ EOF
         fi
         
         if ! type -p docker &>/dev/null; then
-            echo "Docker n'est pas installé, souhaitez vous l'installé ?"
+            echo "Docker n'est pas installé, souhaitez-vous l'installer ? [y/n]"
             read -p "[>]" int
             if (( int == "y" )); then
                 apt install -y docker
                 apt upgrade || upgrade
+            else
+                echo "OK"
+                exit 1
             fi
         fi;;
 
-        #installation des essentiels de sécurité
     2) 
-        echo "Installation des essentiels de sécurité"
+        echo "Mise en place des éléments essentiels de sécurité"
 
         apt install ufw -y
 
