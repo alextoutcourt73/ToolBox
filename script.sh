@@ -1,66 +1,89 @@
 #!/usr/bin/bash
 
+# Fonction pour vérifier si un programme est installé
+check_installation() {
+    if type -p $1 &>/dev/null; then
+        echo "$1 est déjà installé."
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Fonction pour installer un programme
+install_program() {
+    local program=$1
+    echo "$program n'est pas installé, souhaitez-vous l'installer ? [y/n]"
+    read -p "[>]" int
+    if [[ $int == "y" ]]; then
+        apt install -y $program
+        apt update && apt upgrade
+    else
+        echo "Installation de $program annulée."
+    fi
+}
+
+# Vérification des privilèges root
+if [[ $EUID -ne 0 ]]; then
+   echo "Ce script doit être exécuté en tant que root." 
+   exit 1
+fi
+
+# Liste des programmes essentiels
+essential_programs=("docker" "curl" "htop" "neofetch")
+
+# Liste des programmes de sécurité
+security_programs=("ufw" "fail2ban")
+
 while true; do
-        cat << EOF
+    cat << EOF
 
-             #######                      ######                
-                #     ####   ####  #      #     #  ####  #    # 
-                #    #    # #    # #      #     # #    #  #  #  
-                #    #    # #    # #      ######  #    #   ##   
-                #    #    # #    # #      #     # #    #   ##   
-                #    #    # #    # #      #     # #    #  #  #  
-                #     ####   ####  ###### ######   ####  #    # 
+         #######                      ######                
+            #     ####   ####  #      #     #  ####  #    # 
+            #    #    # #    # #      #     # #    #  #  #  
+            #    #    # #    # #      ######  #    #   ##   
+            #    #    # #    # #      #     # #    #   ##   
+            #    #    # #    # #      #     # #    #  #  #  
+            #     ####   ####  ###### ######   ####  #    # 
 
-            ToolBox facilite l'installation de l'essentiel pour 
-            Transformer votre distribution en serveur.
-            Assurez-vous d'être en root avant d'exécuter le script
+        ToolBox facilite l'installation de l'essentiel pour 
+        Transformer votre distribution en serveur.
+        Assurez-vous d'être en root avant d'exécuter le script
 
-            1. Mettre en place les éléments essentiels (Docker, etc.)
-            2. Mettre en place les éléments essentiels de sécurité
-            3. Faire une backup du pc (a faire avant tout)
-            99. Quit
+        1. Mettre en place les éléments essentiels (Docker, etc.)
+        2. Mettre en place les éléments essentiels de sécurité
+        3. Faire une backup du pc (à faire avant tout)
+        99. Quitter
 EOF
 
-    read -p "->" REPLY
+    read -p "-> " REPLY
 
     case $REPLY in
-    1) 
-        if type -p docker &>/dev/null; then
-            echo "Docker est installé !"
-            exit 1
-        fi
-        
-        if ! type -p docker &>/dev/null; then
-            echo "Docker n'est pas installé, souhaitez-vous l'installer ? [y/n]"
-            read -p "[>]" int
-            if (( int == "y" )); then
-                curl https://raw.githubusercontent.com/s4dic/dockerautoinstall/main/dockerautoinstall.sh | bash
-                apt update && apt upgrade
-            else
-                echo "OK"
-                exit 1
-            fi
-        fi;;
-
-    2) 
-        echo "Mise en place des éléments essentiels de sécurité"
-
-        if ! type -p ufw &>/dev/null; then
-            echo "Voulez-vous installé UFW ? [y/n]"
-            read -p "[>]" int
-            
-            if (( int == "y" )); then
-                apt install -y ufw
-                
-            else
-                echo "OK"
-                exit 1
-            fi
-        fi
-        ;;
-        
-    99)
-          echo "Arret du prgramme"
-          break;
+        1)
+            echo "Installation des éléments essentiels"
+            for program in "${essential_programs[@]}"; do
+                if ! check_installation $program; then
+                    install_program $program
+                fi
+            done
+            ;;
+        2)
+            echo "Mise en place des éléments essentiels de sécurité"
+            for program in "${security_programs[@]}"; do
+                if ! check_installation $program; then
+                    install_program $program
+                fi
+            done
+            ;;
+        3)
+            echo "Fonction de backup non implémentée."
+            ;;
+        99)
+            echo "Arrêt du programme."
+            break
+            ;;
+        *)
+            echo "Option invalide, veuillez réessayer."
+            ;;
     esac
 done
