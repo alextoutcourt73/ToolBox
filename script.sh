@@ -46,13 +46,12 @@ while true; do
             #    #    # #    # #      #     # #    #  #  #  
             #     ####   ####  ###### ######   ####  #    # 
 
-        ToolBox facilite l'installation de l'essentiel pour 
-        Transformer votre distribution en serveur.
-        Assurez-vous d'être en root avant d'exécuter le script
+        ToolBox facilite l'installation de paquet essentiel pour 
+        votre serveur.
 
-        1. Mettre en place les éléments essentiels (Docker, etc.)
-        2. Mettre en place les éléments essentiels de sécurité
-        3. Faire une backup du pc (à faire avant tout)
+        1. Télechargé les paquets essentiels 
+        2. Téléchargé les paquets essentiels de sécurité
+        3. Faire une backup du pc (work in progress)
         99. Quitter
 EOF
 
