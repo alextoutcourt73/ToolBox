@@ -92,6 +92,7 @@ backup() {
 
 
 restore_backup() {
+    
     echo -e "${GREEN}Restauration de la sauvegarde...${NC}"
     read -p "Chemin de la sauvegarde à restaurer : " backup_path
     
@@ -111,6 +112,8 @@ restore_backup() {
 }
 
 enssential_pkg() {
+
+# script for install docker credit S4dic -> https://github.com/s4dic
 
 case $version in
   ubuntu)
