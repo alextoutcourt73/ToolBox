@@ -92,7 +92,6 @@ backup() {
 
 
 restore_backup() {
-    
     echo -e "${GREEN}Restauration de la sauvegarde...${NC}"
     read -p "Chemin de la sauvegarde à restaurer : " backup_path
     
