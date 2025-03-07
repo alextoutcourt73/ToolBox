@@ -29,5 +29,5 @@ nano script.sh
 Ce script effectue des modifications sur le système. Assure-toi de bien comprendre les actions réalisées avant de l'exécuter.
 
 ## Licence
-Ce projet est sous licence MIT - Voir le fichier LICENSE pour plus de détails.
+Ce projet est sous licence Apache2.0 - Voir le fichier LICENSE pour plus de détails.
 
