@@ -185,7 +185,8 @@ while true; do
 
     1. Télechargé les paquets essentiels 
     2. Téléchargé les paquets essentiels de sécurité
-    3. Faire une backup du serveur (work in progress)
+    3. Faire une backup du serveur
+    4. Restaurer une backup
     99. Quitter
 EOF
 
@@ -200,6 +201,9 @@ EOF
             ;;
         3)
             backup
+            ;;
+        4)
+            restore_backup
             ;;
         99)
             echo "Arrêt du programme."
