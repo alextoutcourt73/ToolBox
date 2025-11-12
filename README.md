@@ -1,33 +1,81 @@
-# ToolBox - Installation des paquets essentiels pour un serveur
+# ToolBox
 
-## Description
-ToolBox est un script shell permettant d'installer rapidement les paquets essentiels sur un serveur Linux. Il est conçu pour simplifier la mise en place d'un environnement de base en installant automatiquement les outils et dépendances courants.
+ToolBox est un script bash permettant l'installation d'outils essentiels pour transformer votre distribution Linux en serveur.
 
-## Fonctionnalités
-- Mise à jour des paquets
-- Installation des outils de base (docker, docker-compose, etc.)
-- Installation des services essentiels (fail2ban, UFW, etc.)
-- Créer et envoyer un backup sur un serveur distant
+## Key Features & Benefits
 
-## Prérequis
-- Un serveur fonctionnant sous une distribution Linux (Debian, Ubuntu, CentOS, etc.)
-- Accès root
+*   **Automated Installation:** Simplifies server setup by automating the installation of essential tools and dependencies.
+*   **Essential Tools:** Installs commonly used server tools, such as Docker, Docker Compose, and security utilities.
+*   **Time Saving:** Reduces the manual effort required to configure a server environment.
+*   **Base Configuration:** Provides a foundation for further server customization.
+*   **Package Updates:** Ensures the system is up-to-date with the latest package versions.
 
-## Installation
-1. Télécharger le script :
-   ```sh
-   curl https://github.com/alextoutcourt73/ToolBox/blob/Realease/script.sh | bash
-   ```
+## Prerequisites & Dependencies
 
-## Personnalisation
-Le script peut être modifié pour ajouter ou supprimer des paquets en fonction de tes besoins. Ouvre simplement le fichier avec un éditeur de texte :
-```sh
-nano script.sh
-```
+*   A Linux distribution (tested primarily on Debian-based systems).
+*   `bash` shell.
+*   `sudo` privileges for installing packages.
+*   Internet access to download packages.
 
-## Avertissement
-Ce script effectue des modifications sur le système. Assure-toi de bien comprendre les actions réalisées avant de l'exécuter.
+## Installation & Setup Instructions
 
-## Licence
-Ce projet est sous licence Apache2.0 - Voir le fichier LICENSE pour plus de détails.
+1.  **Clone the repository:**
 
+    ```bash
+    git clone https://github.com/angle-droit/ToolBox.git
+    cd ToolBox
+    ```
+
+2.  **Make the script executable:**
+
+    ```bash
+    chmod +x script.sh
+    ```
+
+3.  **Run the script with sudo privileges:**
+
+    ```bash
+    sudo ./script.sh
+    ```
+
+    **Important:** Review the script's content before executing it to understand which packages will be installed.
+
+## Usage Examples
+
+After running the script, the following tools (if selected during script execution) will be available:
+
+*   **Docker:** `docker --version`
+*   **Docker Compose:** `docker-compose --version`
+*   **Fail2ban:** (Will run as a service) `sudo systemctl status fail2ban`
+*   **UFW:** (Will be enabled with default firewall rules) `sudo ufw status`
+
+## Configuration Options
+
+The `script.sh` file can be modified to customize the installation process:
+
+*   **Package Selection:** Edit the script to add or remove packages to be installed.
+*   **Firewall Rules:** Customize UFW rules directly in the script.
+*   **Service Configuration:** Modify the configuration files of installed services (e.g., `/etc/fail2ban/jail.conf` or `/etc/ufw/ufw.conf`) after installation.
+*   **Custom Installation Paths:** Modify the install locations within the script
+
+## Contributing Guidelines
+
+Contributions are welcome! Here's how you can contribute:
+
+1.  Fork the repository.
+2.  Create a new branch for your feature or bug fix: `git checkout -b feature/your-feature-name` or `git checkout -b bugfix/your-bugfix-name`.
+3.  Make your changes.
+4.  Commit your changes: `git commit -m "Add your commit message"`
+5.  Push to the branch: `git push origin feature/your-feature-name`
+6.  Create a pull request.
+
+Please ensure your code follows the existing style and includes appropriate comments.
+
+## License Information
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+*   This project uses the `bash` scripting language.
+*   Special thanks to the open-source community for providing valuable tools and resources.
